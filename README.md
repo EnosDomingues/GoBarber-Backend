@@ -1,18 +1,18 @@
 # Recuperação de senha
 
-**RF** [comment]: <(Requisitos Funcionais - Quais funcionalidades teremos)> 
+**RF** Requisitos Funcionais - Quais funcionalidades teremos
 
 - O usuário deve poder recuperar sua senha informando seu e-mail.
 - O usuário deve receber um e-mail com instruções de recuperação de senha.
 - o usuário deve poder resetar sua senha. 
 
-**RNF** [comment]: <(Requisitos não funcionais - Não estão ligadas com a RN, voltado para parte técnica)> 
+**RNF** Requisitos não funcionais - Não estão ligadas com a RN, voltado para parte técnica
 
 - Utilizar Mailtrap para testar envios em ambiente de desenvolvimento.
 - Utilizar o Amazon SES para envios em produção.
 - O envio de e-mails deve acontecer em segundo plano.
 
-**RN** [comment]: <(Regra de Negócio - Deve estar relacionada a um requisito funcional)> 
+**RN** Regra de Negócio - Deve estar relacionada a um requisito funcional
 
 - O link enviado por email para resetar a senha deve expirar em 2 horas.
 - O usuário precisa confirmar a nova senha ao resetar sua senha.
@@ -29,7 +29,7 @@
 - Para atualizar sua senha o usuário deve informar a senha antiga.
 - Para atualizar sua senha o usuário deve confimar a nova senha.
 
-# Painnel do prestador
+# Painel do prestador
 
 **RF**
 
