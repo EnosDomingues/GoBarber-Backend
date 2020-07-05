@@ -4,21 +4,23 @@ import AppError from '@shared/errors/AppError';
 import AuthenticateUser from './AuthenticateUserService';
 import CreateUSerService from './CreateUserService';
 
+let fakeUsersRepository: FakeUsersRepository;
+let fakeHashProvider: FakeHashProvider;
+let createUser: CreateUSerService;
+let authenticateUser: AuthenticateUser;
+
 describe('AuthenticateUser', () => {
+  beforeEach(() => {
+    fakeUsersRepository = new FakeUsersRepository();
+    fakeHashProvider = new FakeHashProvider();
+    createUser = new CreateUSerService(fakeUsersRepository, fakeHashProvider);
+
+    authenticateUser = new AuthenticateUser(
+      fakeUsersRepository,
+      fakeHashProvider,
+    );
+  });
   it('Should be able to authenticate', async () => {
-    const fakeUsersRepository = new FakeUsersRepository();
-    const fakeHashProvider = new FakeHashProvider();
-
-    const createUser = new CreateUSerService(
-      fakeUsersRepository,
-      fakeHashProvider,
-    );
-
-    const authenticateUser = new AuthenticateUser(
-      fakeUsersRepository,
-      fakeHashProvider,
-    );
-
     const user = await createUser.execute({
       name: 'John Doe',
       email: 'johndoe@example.com',
@@ -35,10 +37,7 @@ describe('AuthenticateUser', () => {
   });
 
   it('Should not be able to authenticate  with non existing user', async () => {
-    const fakeUsersRepository = new FakeUsersRepository();
-    const fakeHashProvider = new FakeHashProvider();
-
-    const authenticateUser = new AuthenticateUser(
+    authenticateUser = new AuthenticateUser(
       fakeUsersRepository,
       fakeHashProvider,
     );
@@ -52,15 +51,9 @@ describe('AuthenticateUser', () => {
   });
 
   it('Should not be able to authenticate with wrong password ', async () => {
-    const fakeUsersRepository = new FakeUsersRepository();
-    const fakeHashProvider = new FakeHashProvider();
+    createUser = new CreateUSerService(fakeUsersRepository, fakeHashProvider);
 
-    const createUser = new CreateUSerService(
-      fakeUsersRepository,
-      fakeHashProvider,
-    );
-
-    const authenticateUser = new AuthenticateUser(
+    authenticateUser = new AuthenticateUser(
       fakeUsersRepository,
       fakeHashProvider,
     );
