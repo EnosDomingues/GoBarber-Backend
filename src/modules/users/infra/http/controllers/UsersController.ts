@@ -9,14 +9,12 @@ export default class UsersController {
 
     const createUser = container.resolve(CreateUserService);
 
-    const user = await createUser.execute({
+    await createUser.execute({
       name,
       email,
       password,
     });
 
-    delete user.password;
-
-    return response.json(user);
+    return response.json({ name, email });
   }
 }
