@@ -8,17 +8,16 @@ let fakeStorageProvider: FakeStorageProvider;
 let updateUserAvatar: UpdateUserAvatarService;
 
 describe('UpdateUserAvatar', () => {
+  beforeEach(() => {
+    fakeUsersRepository = new FakeUsersRepository();
+    fakeStorageProvider = new FakeStorageProvider();
+
+    updateUserAvatar = new UpdateUserAvatarService(
+      fakeUsersRepository,
+      fakeStorageProvider,
+    );
+  });
   it('Should be able to update avatar', async () => {
-    beforeEach(() => {
-      fakeUsersRepository = new FakeUsersRepository();
-      fakeStorageProvider = new FakeStorageProvider();
-
-      updateUserAvatar = new UpdateUserAvatarService(
-        fakeUsersRepository,
-        fakeStorageProvider,
-      );
-    });
-
     const user = await fakeUsersRepository.create({
       name: 'John Doe',
       email: 'johndoe@example.com',
