@@ -5,8 +5,8 @@ import IAppointmentsRepository from '@modules/appointments/repositories/IAppoint
 
 interface IRequest {
   provider_id: string;
-  month: number;
   year: number;
+  month: number;
   day: number;
 }
 
@@ -48,6 +48,7 @@ class ListProviderDayAvailabilityService {
       const hasAppointmentInHour = appointments.find(
         appointment => getHours(appointment.date) === hour,
       );
+
       return {
         hour,
         available: !hasAppointmentInHour,

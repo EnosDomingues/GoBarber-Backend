@@ -27,7 +27,7 @@ describe('ListProviderDayAvailability', () => {
       provider_id: 'user',
       year: 2020,
       month: 5,
-      day: 23,
+      day: 20,
     });
 
     expect(availability).toEqual(
