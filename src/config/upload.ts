@@ -7,9 +7,17 @@ const tmpFolder = path.resolve(__dirname, '..', '..', 'tmp');
 interface IUploadConfig {
   driver: 's3' | 'disk';
 
+  tmpFolder: string;
+  uploadsFolder: string;
+
+  multer: {
+    storage: StorageEngine;
+  };
+
   config: {
-    disk: {
-      storage: StorageEngine;
+    disk: {};
+    aws: {
+      bucket: string;
     };
   };
 }
@@ -20,17 +28,22 @@ export default {
   tmpFolder,
   uploadsFolder: path.resolve(tmpFolder, 'uploads'),
 
-  config: {
-    disk: {
-      storage: multer.diskStorage({
-        destination: tmpFolder,
-        filename(request, file, callback) {
-          const fileHash = crypto.randomBytes(10).toString('hex');
-          const fileName = `${fileHash}-${file.originalname}`;
+  multer: {
+    storage: multer.diskStorage({
+      destination: tmpFolder,
+      filename(request, file, callback) {
+        const fileHash = crypto.randomBytes(10).toString('hex');
+        const fileName = `${fileHash}-${file.originalname}`;
 
-          return callback(null, fileName);
-        },
-      }),
+        return callback(null, fileName);
+      },
+    }),
+  },
+
+  config: {
+    disk: {},
+    aws: {
+      bucket: 'bucket-appgobbarber',
     },
   },
 } as IUploadConfig;
