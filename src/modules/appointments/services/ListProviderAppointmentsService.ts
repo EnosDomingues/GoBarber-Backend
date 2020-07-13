@@ -4,7 +4,7 @@ import Appointment from '@modules/appointments/infra/typeorm/entities/Appointmen
 import IAppointmentsRepository from '@modules/appointments/repositories/IAppointmentsRepository';
 
 import ICacheProvider from '@shared/container/providers/CacheProvider/models/ICacheProvider';
-import cache from '@config/cache';
+// import cache from '@config/cache';
 
 interface IRequest {
   provider_id: string;
@@ -41,6 +41,8 @@ class ListProviderAppointmentsService {
         day,
       },
     );
+
+    // await this.cacheProvider.save('enos', 'enos');
 
     return appointments;
   }
